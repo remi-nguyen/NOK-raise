@@ -23,7 +23,7 @@ The script is executed in a terminal with three parameters `username` `IP_addres
 * Configuration errors are raised
    * `WARNING! VLAN <Vlan_ID> does not exist on <Hostname>`
    * `WARNING! No flow related to vlan <Vlan_ID> found on the Rad`
-   * `Check on <Hostname>-><IP@> failed`
+   * `Check on <Hostname> -> <IP@> failed`
 * Showing the output of STP and MPLS commands executed on each devices where the VLAN is configured.
 * Showing information about port, IP destination
 
