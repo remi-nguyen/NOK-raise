@@ -9,7 +9,7 @@ Various information are displayed in the running time, as below.
 
 ## Usage example
 
-The script is executed in a terminal with three parameters `username` `IP address` `Vlan ID`
+The script is executed in a terminal with three parameters `username` `IP_address` `Vlan_ID`
 
 ```sh
 42sh$ python3 Node.py user1 10.170.1.2 2626
