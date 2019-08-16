@@ -1,0 +1,252 @@
+$ python3 Node.py user1 10.170.1.2 2626
+Password:
+---
+[.] LOADING...
+[+] Connected to HotelTechnologies-4507
+[+] Connecting to CPE 10.170.6.121
+[+] Connected to 203AX-PROJET3_LINKT-AC005825
+[+] Check on 203AX-PROJET3_LINKT-AC005825 done
+[+] Check on HotelTechnologies-4507 done
+[+] Connected to HotelTechno-7609
+[*] MPLS Status is UP
+[+] Check on HotelTechno-7609 done
+[+] Connected to Loon-7609
+[*] MPLS Status is DOWN
+[+] Check on Loon-7609 done
+[+] Device 75TH2-X8A-1 is a Huawei
+[+] Connecting to 75TH2-X8A-1
+[+] Connected to 75TH2-X8A-1->10.129.1.25
+[*] Session state is up
+[*] AC state is up
+[+] Check on 75TH2-X8A-1 done
+[+] Connecting to collecte 10.180.65.22
+[+] Connected to ETX-220A#
+[+] Check on ETX-220A# done
+
+Visited Nodes: ['HotelTechnologies-4507', '203AX-PROJET3_LINKT-AC005825', 'HotelTechno-7609', 'Loon-7609', '75TH2-X8A-1', 'ETX-220A#']
+..Press [ENTER] to continue..
+
+================ RAD 203AX-PROJET3_LINKT-AC005825 10.170.6.121 ================
+
+ configure flow flow  "BPEA_Client_backbone_2626"  info detail
+    classifier "ALL"
+    no marking-profile
+    ingress-color green
+    no drop
+    policer profile "BPEA-policer-2-100"
+    no mark all
+    vlan-tag push vlan 2626 p-bit fixed 0
+    no l2cp
+    ingress-port ethernet 3
+    egress-port ethernet 1 queue 1 block 0/2
+    no service-name
+    no shutdown
+
+ configure flow flow  "BPEA_backbone_Client_2626"  info detail
+    classifier "2626"
+    no marking-profile
+    ingress-color green
+    no drop
+    policer profile "BPEA-policer-2-100"
+    no mark all
+    vlan-tag pop vlan
+    no l2cp
+    ingress-port ethernet 1
+    egress-port ethernet 3 queue 1 block 0/2
+    no service-name
+    no shutdown
+
+ show summary
+Port           Number         Name            Admin    Oper      Speed
+-----------------------------------------------------------------------------
+Ethernet       1              ETH-1           Up       Up        100000000
+Ethernet       2              ETH-2           Down     Down      1000000000
+Ethernet       3              ETH-3           Up       Up        100000000
+Ethernet       4              ETH-4           Down     Down      1000000000
+Ethernet       5              ETH-5           Down     Down      1000000000
+Ethernet       6              ETH-6           Down     Down      1000000000
+Ethernet       101            MNG-ETH         Down     Down      100000000
+SVI            1              SVI 1           Up       Up        0
+SVI            96             SVI 96          Up       Up        0
+
+
+
+
+====================== HotelTechnologies-4507 10.170.1.2 ======================
+
+show spanning-tree vlan 2626
+
+VLAN2626
+  Spanning tree enabled protocol ieee
+  Root ID    Priority    35394
+             Address     0026.cb32.d180
+             This bridge is the root
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+
+  Bridge ID  Priority    35394  (priority 32768 sys-id-ext 2626)
+             Address     0026.cb32.d180
+             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec
+             Aging Time 300
+
+Interface           Role Sts Cost      Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Fa7/27              Desg FWD 19        128.411  P2p
+Po1                 Desg FWD 4         128.641  P2p
+Po2                 Desg FWD 20        128.642  P2p
+
+Fa7/27          AC005825-PROJET3_LINKT-DUNKERQUE_PARE_BRISE-10.170.6.121
+port-c1         HotelTechno-7609
+port-c2         Loon-7609
+
+
+========================= HotelTechno-7609 10.129.1.81 =========================
+
+show mpls l2transport vc 2626
+
+Local intf     Local circuit              Dest address    VC ID      Status
+-------------  -------------------------- --------------- ---------- ----------
+Po1.2626       Eth VLAN 2626              10.129.1.25     2626       UP
+---
+port-c1         HotelTechnologies-4507
+10.129.1.25     75TH2-X8A-1
+
+
+============================ Loon-7609 10.129.1.82 ============================
+
+show mpls l2transport vc 2626
+
+Local intf     Local circuit              Dest address    VC ID      Status
+-------------  -------------------------- --------------- ---------- ----------
+Po1.2626       Eth VLAN 2626              10.129.1.25     2626       DOWN
+---
+port-c1         HotelTechnologies-4507
+10.129.1.25     75TH2-X8A-1
+
+
+=========================== 75TH2-X8A-1 10.129.1.25 ===========================
+
+GigabitEthernet2/0/9 : CN001366-PROJET3_LINKT_COLLECTE-10.180.65.22 | BPEA V3<75TH2-X8A-1>
+
+GigabitEthernet2/0/9.2626 : 10.129.1.81 -> HotelTechno-7609
+
+display mpls l2vc 2626
+ Total LDP VC : 1     1 up       0 down
+
+ *client interface       : GigabitEthernet2/0/9.2626 is up
+  Administrator PW       : no
+  session state          : up
+  AC status              : up
+  Ignore AC state        : disable
+  VC state               : up
+  Label state            : 0
+  Token state            : 0
+  VC ID                  : 2626
+  VC type                : VLAN
+  destination            : 10.129.1.81
+  local VC label         : 33941        remote VC label      : 1481
+  control word           : disable
+  remote control word    : disable
+  forwarding entry       : exist
+  local group ID         : 0
+  remote group ID        : 0
+  local AC OAM State     : up
+  local PSN OAM State    : up
+  local forwarding state : forwarding
+  local status code      : 0x0
+  remote AC OAM state    : up
+  remote PSN OAM state   : up
+  remote forwarding state: forwarding
+  remote status code     : 0x0
+  ignore standby state   : no
+  BFD for PW             : unavailable
+  VCCV State             : up
+  manual fault           : not set
+  active state           : active
+  OAM Protocol           : --
+  OAM Status             : --
+  OAM Fault Type         : --
+  PW APS ID              : --
+  PW APS Status          : --
+  TTL Value              : 1
+  link state             : up
+  local VC MTU           : 9216         remote VC MTU        : 9216
+  local VCCV             : alert ttl lsp-ping bfd
+  remote VCCV            : alert lsp-ping
+  tunnel policy name     : --
+  PW template name       : --
+  primary or secondary   : primary
+  load balance type      : flow
+  Access-port            : false
+  Switchover Flag        : false
+  VC tunnel info         : 1 tunnels
+    NO.0  TNL type       : ldp            , TNL ID : 0x0000000001004c8b66
+  create time            : 43 days, 20 hours, 33 minutes, 3 seconds
+  up time                : 19 days, 3 hours, 8 minutes, 26 seconds
+  last change time       : 19 days, 3 hours, 8 minutes, 26 seconds
+  VC last up time        : 2019/07/26 08:42:12 DST
+  VC total up time       : 43 days, 20 hours, 32 minutes, 41 seconds
+  CKey                   : 3992
+  NKey                   : 16777840
+  PW redundancy mode     : frr
+  AdminPw interface      : --
+  AdminPw link state     : --
+  Forward state          : send active, receive active
+  Diffserv Mode          : uniform
+  Service Class          : --
+  Color                  : --
+  DomainId               : --
+  Domain Name            : --
+
+
+
+========================== RAD ETX-220A# 10.180.65.22 ==========================
+
+ configure flow flow  "BPEA_Client_backbone_2626"  info detail
+    classifier "2626"
+    no marking-profile
+    ingress-color green
+    no cos-mapping
+    no drop
+    policer profile "BPEA-policer-2-100"
+    no mark all
+    no vlan-tag
+    no l2cp
+    ingress-port ethernet 4/2
+    egress-port ethernet 4/1 queue 1 block 0/2
+    no service-name
+    no shutdown
+
+ configure flow flow  "BPEA_backbone_Client_2626"  info detail
+    classifier "2626"
+    no marking-profile
+    ingress-color green
+    no cos-mapping
+    no drop
+    policer profile "BPEA-policer-2-100"
+    no mark all
+    no vlan-tag
+    no l2cp
+    ingress-port ethernet 4/1
+    egress-port ethernet 4/2 queue 1 block 0/2
+    no service-name
+    no shutdown
+
+ show summary
+Port           Number         Name            Admin    Oper      Speed
+-----------------------------------------------------------------------------
+Ethernet       0/101          MNG-ETH         Down     Down      100000000
+Ethernet       1/1            ETH-1/1         Down     Down      1000000000
+Ethernet       1/2            ETH-1/2         Down     Down      1000000000
+Ethernet       1/3            ETH-1/3         Down     Down      1000000000
+Ethernet       1/4            ETH-1/4         Down     Down      1000000000
+Ethernet       1/5            ETH-1/5         Down     Down      1000000000
+Ethernet       1/6            ETH-1/6         Down     Down      1000000000
+Ethernet       1/7            ETH-1/7         Down     Down      1000000000
+Ethernet       1/8            ETH-1/8         Down     Down      1000000000
+Ethernet       1/9            ETH-1/9         Down     Down      1000000000
+Ethernet       1/10           ETH-1/10        Down     Down      1000000000
+Ethernet       3/1            ETH-3/1         Down     Down      10000000000
+Ethernet       4/1            ETH-4/1         Up       Up        10000000000
+Ethernet       4/2            ETH-4/2         Up       Up        10000000000
+SVI            1              SVI 1           Up       Up        0
+SVI            96             SVI 96          Up       Up        0
