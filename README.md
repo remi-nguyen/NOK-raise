@@ -20,12 +20,44 @@ The script is executed in a terminal with three parameters `username` `IP_addres
 ## Notable features
 
 * Automating test on routers, switches, NTE from CISCO, HUAWEI, RAD
+* If login failed on a device, you can try with another login and password
 * Configuration errors are raised
    * `WARNING! VLAN <Vlan_ID> does not exist on <Hostname>`
    * `WARNING! No flow related to vlan <Vlan_ID> found on the Rad`
    * `Check on <Hostname> -> <IP@> failed`
 * Showing the output of STP and MPLS commands executed on each devices where the VLAN is configured.
-* Showing information about port, IP destination
+* Showing information about hostname, interface, destination IP address
+
+```sh
+====================== HotelTechnologies-4507 10.170.1.2 ======================
+ 
+show spanning-tree vlan 2626
+
+[...]
+
+Interface           Role Sts Cost      Prio.Nbr Type
+------------------- ---- --- --------- -------- --------------------------------
+Fa7/27              Desg FWD 19        128.411  P2p
+Po1                 Desg FWD 4         128.641  P2p
+Po2                 Desg FWD 20        128.642  P2p
+ 
+Fa7/27          AC005825-PROJET3_LINKT-DUNKERQUE_PARE_BRISE-10.170.6.121
+port-c1         HotelTechno-7609
+port-c2         Loon-7609
+```
+
+```sh
+============================ Loon-7609 10.129.1.82 ============================
+ 
+show mpls l2transport vc 2626
+ 
+Local intf     Local circuit              Dest address    VC ID      Status
+-------------  -------------------------- --------------- ---------- ----------
+Po1.2626       Eth VLAN 2626              10.129.1.25     2626       DOWN
+---
+port-c1         HotelTechnologies-4507
+10.129.1.25     75TH2-X8A-1
+```
 
 ## What I learned
 
