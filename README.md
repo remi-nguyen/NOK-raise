@@ -20,12 +20,12 @@ The script is executed in a terminal with three parameters `username` `IP_addres
 ## Notable features
 
 * Automating test on routers, switches, NTE from CISCO, HUAWEI, RAD
-* If login failed on a device, you can try with another login and password
+* If login failed on a device, you can try with different login and password
 * Configuration errors are raised
    * `WARNING! VLAN <Vlan_ID> does not exist on <Hostname>`
    * `WARNING! No flow related to vlan <Vlan_ID> found on the Rad`
    * `Check on <Hostname> -> <IP@> failed`
-* Showing the output of STP and MPLS commands executed on each devices where the VLAN is configured.
+* Showing the output of spanning-tree (STP) and MPLS commands executed on each devices where the VLAN is configured.
 * Showing information about hostname, interface, destination IP address
 
 ```sh
