@@ -14,6 +14,7 @@ The script is executed in a terminal with three parameters `username` `IP_addres
 ```sh
 42sh$ python3 Node.py user1 10.170.1.2 2626
 ```
+The script will output the STP/MPLS status and the flows configuration:
 
 [View the whole output](Annex/check_done_10.170.1.2_2626.txt)
 
