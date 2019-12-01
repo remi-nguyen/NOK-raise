@@ -7,7 +7,7 @@ Various information are displayed in the running time, as below.
 
 ![App demo](Resc/demo_nok.gif)
 
-## Usage example
+### Usage example
 
 The script is executed in a terminal with three parameters `username` `IP_address` `Vlan_ID`
 
@@ -18,7 +18,7 @@ The script will output the STP/MPLS status and the flows configuration:
 
 [View the whole output](Annex/check_done_10.170.1.2_2626.txt)
 
-## Notable features
+### Notable features
 
 * Automating test on routers, switches, NTE from CISCO, HUAWEI, RAD
 * If login failed on a device, you can try with different login and password
@@ -60,7 +60,7 @@ port-c1         HotelTechnologies-4507
 10.129.1.25     75TH2-X8A-1
 ```
 
-## What I learned
+### What I learned
 
 * Connecting to devices via SSH and Telnet using Pexpect and Python 3
 * Processing data with Regex
@@ -69,3 +69,7 @@ port-c1         HotelTechnologies-4507
   * Queue
   * Stack
   * Binary Tree
+  
+### Author
+
+* **Rémi Nguyen**
