@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 from Colors import *
-
 from pexpect import pxssh
-import pexpect
 from collections import deque
+import pexpect
 import getpass
 import time
 import re
