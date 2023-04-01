@@ -38,7 +38,7 @@ class Node:
         global CPE
         global hosts_list
         plate_forme2 = '172.16.128.105'
-        username_pf2 = 'tibco'
+        username_pf2 = username
         s = pxssh.pxssh()
         # Try to connect to Plate-Forme 2
         assert(s.login(plate_forme2, username_pf2, password)), "Not connected to PF2"
@@ -209,7 +209,7 @@ class Node:
 
     def session_rad(self, vlan_id):
         plate_forme2 = '172.16.128.105'
-        user_pf2 = 'tibco'
+        user_pf2 = username
         s = pxssh.pxssh()
         s.maxread = 500000
         assert(s.login(plate_forme2, user_pf2, password)), "Not connected to PF2"
@@ -324,7 +324,7 @@ class Node:
 
     def session_rad_collecte(self, vlan_id):
         plate_forme2 = '172.16.128.105'
-        user_pf2 = 'tibco'
+        user_pf2 = username
         s = pxssh.pxssh()
         assert(s.login(plate_forme2, user_pf2, password)), "Not connected to PF2"
         try:
@@ -369,7 +369,7 @@ class Node:
         global CPE
         global hosts_list
         plate_forme2 = '172.16.128.105'
-        username_pf2 = 'tibco'
+        username_pf2 = username
         s = pxssh.pxssh()
         assert(s.login(plate_forme2, username_pf2, password)), "Not connected to PF2"
         #s.sendline("cat /etc/hosts")
@@ -513,6 +513,7 @@ if __name__ == "__main__":
             vlan_id = aux_fct.validVlan(arg)
     # SERVICE:=True if AC else False
     SERVICE = None
+    username = input("Username: ")
     password = getpass.getpass()
     hosts_list = None
     visited_nodes = list()
